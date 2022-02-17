@@ -1,0 +1,6 @@
+bootstrap.servers=KAFKA_SERVICE_URL
+enable.ssl.certificate.verification=false
+ssl.ca.location=ssl/ca.cer
+security.protocol=ssl
+ssl.key.location=ssl/myuser.key
+ssl.certificate.location=ssl/myuser.cert

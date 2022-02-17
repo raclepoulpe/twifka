@@ -1,0 +1,53 @@
+image:
+  file: .gitpod.Dockerfile
+
+tasks:
+- name: Create directories
+  init: >
+    mkdir ssl &&
+    mkdir -p step02/producer/ssl &&
+    mkdir -p step03/producer/ssl &&
+    mkdir -p step04/producer/ssl &&
+    mkdir -p step05/producer/ssl &&
+    mkdir -p step05/consumers/bash/ssl &&
+    gp sync-done direxists
+  command: echo "Directories created"
+
+- name: Create ca.cer
+  init: gp sync-await direxists && gp sync-done caCer
+  command: echo $KAFKA_CA_CER | base64 -d > ssl/ca.cer
+- name: Create myuser.cert
+  init: gp sync-await direxists && gp sync-done myuserCert
+  command: echo $KAFKA_MYUSER_CERT | base64 -d > ssl/myuser.cert
+- name: Create myuser.key
+  init: gp sync-await direxists && gp sync-done myuserKey
+  command: echo $KAFKA_MYUSER_KEY | base64 -d > ssl/myuser.key
+
+- name: Create kafkacat.conf file
+  command: cat kafkacat.conf.template | sed -e "s/KAFKA_SERVICE_URL/$(echo ${KAFKA_SERVICE_URL}|base64 -d)/g" > kafkacat.conf && rm kafkacat.conf.template && gp sync-done kafkaconf
+
+- name: Create TWITTER_API_properties.sh file
+  command: cat TWITTER_API_properties.sh.template | sed -e "s/TWITTER_BEARER_TOKEN/$(echo ${TWITTER_BEARER_TOKEN}|base64 -d)/g"> TWITTER_API_properties.sh && rm TWITTER_API_properties.sh.template && gp sync-done twitterProperties
+
+- name: Copy certs
+  init: gp sync-await caCer && gp sync-await myuserCert && gp sync-await myuserKey
+  command: cp ssl/* step02/producer/ssl && cp ssl/* step03/producer/ssl && cp ssl/* step04/producer/ssl && cp ssl/* step05/producer/ssl && cp ssl/* step05/consumers/bash/ssl
+
+- name: Copy kafkaconf file
+  init: gp sync-await direxists && gp sync-await kafkaconf
+  command: cp kafkacat.conf step02/producer/kafkacat.conf && cp kafkacat.conf step03/producer/kafkacat.conf && cp kafkacat.conf step04/producer/kafkacat.conf && cp kafkacat.conf step05/producer/kafkacat.conf && cp kafkacat.conf step05/consumers/bash/kafkacat.conf
+
+- name: Copy Twitter properties file
+  init: gp sync-await direxists && gp sync-await twitterProperties
+  command: cp TWITTER_API_properties.sh step03/producer/TWITTER_API_properties.sh && cp TWITTER_API_properties.sh step04/producer/TWITTER_API_properties.sh
+
+- name: Get public IP address
+  command: curl -s https://ifconfig.me > ${GITPOD_REPO_ROOT}/IP.pub && echo "Your public IP address is stored in the IP.pub file" && gp sync-done ippub
+
+- name: Set PS1 prompt
+  init: gp sync-await ippub
+  command: export PS1='\[\033[38;5;2m\]$(cat ${GITPOD_REPO_ROOT}/IP.pub)\[$(tput sgr0)\] \[\033[38;5;4m\]\w\[$(tput sgr0)\]$(__git_ps1 " (%s)")$ '
+
+vscode:
+  extensions:
+    - ms-azuretools.vscode-docker
