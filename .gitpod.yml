@@ -41,6 +41,10 @@ tasks:
   init: gp sync-await direxists && gp sync-await twitterProperties
   command: cp TWITTER_API_properties.sh step03/producer/TWITTER_API_properties.sh && cp TWITTER_API_properties.sh step04/producer/TWITTER_API_properties.sh
 
+- name: Add OVHcloud API keys variables to properties
+  init: echo "OVH_API_AK=\"$(echo $OVH_API_AK_b64|base64 -d)\"" >> helpers/OVHcloud.properties.sh && echo "OVH_API_AS=\"$(echo $OVH_API_AS_b64|base64 -d)\"" >> helpers/OVHcloud.properties.sh && echo "OVH_API_CK=\"$(echo $OVH_API_CK_b64|base64 -d)\"" >> helpers/OVHcloud.properties.sh
+  command: echo "OVHcloud API keys variables added to OVHcloud.properties.sh file ✅"
+
 - name: Get public IP address
   command: curl -s https://ifconfig.me > ${GITPOD_REPO_ROOT}/IP.pub && echo "Your public IP address is stored in the IP.pub file" && gp sync-done ippub
 
