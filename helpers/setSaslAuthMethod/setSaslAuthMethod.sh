@@ -58,7 +58,7 @@ done
 
 data="{\"kafka_authentication_methods.sasl\":\"$myresp\"}"
 
-resp="$($api POST /cloud/project/${serviceId}/database/kafka/${kafkaClusterId}/advancedConfiguration ${data})"
+resp="$($api PUT /cloud/project/${serviceId}/database/kafka/${kafkaClusterId}/advancedConfiguration ${data})"
 
 echo "response:"
 echo "${resp}"
