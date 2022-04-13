@@ -164,7 +164,7 @@ Load the Twitter API properties:
 Load the additional functions:
 
 ```bash
-. producer/PRODUCER_function.sh
+. producer/PRODUCER_functions.sh
 ```
 
 Define a query:
