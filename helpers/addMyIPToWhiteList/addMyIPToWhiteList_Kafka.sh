@@ -2,10 +2,10 @@
   
 # Script variables(s)
 SCRIPTROOTDIR="$GITPOD_REPO_ROOT"
-source $SCRIPTROOTDIR/OVHcloud.properties.sh
+source $SCRIPTROOTDIR/helpers/OVHcloud.properties.sh
 
 myPubIP="$(cat $SCRIPTROOTDIR/IP.pub)"
-api="$SCRIPTROOTDIR/scripts/ovhAPI.sh"
+api="$SCRIPTROOTDIR/helpers/ovhAPI.sh"
 
 echo ""
 echo -e "Add this public IP address \e[1m\033[38;5;2m${myPubIP}$(tput sgr0) to an OVHcloud Kafka managed cluster"
