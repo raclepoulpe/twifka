@@ -50,7 +50,7 @@ echo ""
 
 echo "Select value:"
 echo ""
-select myvalue in "true false"
+select myvalue in "true" "false"
 do
 	myresp="$myvalue"
 	break
