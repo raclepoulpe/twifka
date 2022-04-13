@@ -15,7 +15,7 @@
 # $ ./ovhAPI.sh GET /domain/zone/labdevrel.ovh/export | awk '{gsub(/\\n/,"\n");gsub(/\\t/,"\t")}1'
 
 # Script variables(s)
-SCRIPTROOTDIR="$GITPOD_REPO_ROOT"
+SCRIPTROOTDIR="$GITPOD_REPO_ROOT/helpers"
 source $SCRIPTROOTDIR/OVHcloud.properties.sh
 
 # Input parameters
