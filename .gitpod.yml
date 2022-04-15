@@ -42,7 +42,7 @@ tasks:
   command: cp TWITTER_API_properties.sh step03/producer/TWITTER_API_properties.sh && cp TWITTER_API_properties.sh step04/producer/TWITTER_API_properties.sh
 
 - name: Add OVHcloud API keys variables to properties
-  init: echo "OVH_API_AK=\"$(echo $OVH_API_AK_b64|base64 -d)\"" >> helpers/OVHcloud.properties.sh && echo "OVH_API_AS=\"$(echo $OVH_API_AS_b64|base64 -d)\"" >> helpers/OVHcloud.properties.sh && echo "OVH_API_CK=\"$(echo $OVH_API_CK_b64|base64 -d)\"" >> helpers/OVHcloud.properties.sh
+  init: cp helpers/OVHcloud.properties.sh.template helpers/OVHcloud.properties.sh && echo "OVH_API_AK=\"$(echo $OVH_API_AK_b64|base64 -d)\"" >> helpers/OVHcloud.properties.sh && echo "OVH_API_AS=\"$(echo $OVH_API_AS_b64|base64 -d)\"" >> helpers/OVHcloud.properties.sh && echo "OVH_API_CK=\"$(echo $OVH_API_CK_b64|base64 -d)\"" >> helpers/OVHcloud.properties.sh
   command: echo "OVHcloud API keys variables added to OVHcloud.properties.sh file ✅"
 
 - name: Get public IP address
