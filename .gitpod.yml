@@ -24,10 +24,10 @@ tasks:
   command: echo $KAFKA_MYUSER_KEY | base64 -d > ssl/myuser.key
 
 - name: Create kafkacat.conf file
-  command: cat kafkacat.conf.template | sed -e "s/KAFKA_SERVICE_URL/$(echo ${KAFKA_SERVICE_URL}|base64 -d)/g" > kafkacat.conf && gp sync-done kafkaconf
+  command: cat templates/kafkacat.conf.template | sed -e "s/KAFKA_SERVICE_URL/$(echo ${KAFKA_SERVICE_URL}|base64 -d)/g" > kafkacat.conf && gp sync-done kafkaconf
 
 - name: Create TWITTER_API_properties.sh file
-  command: cat TWITTER_API_properties.sh.template | sed -e "s/TWITTER_BEARER_TOKEN/$(echo ${TWITTER_BEARER_TOKEN}|base64 -d)/g"> TWITTER_API_properties.sh && gp sync-done twitterProperties
+  command: cat templates/TWITTER_API_properties.sh.template | sed -e "s/TWITTER_BEARER_TOKEN/$(echo ${TWITTER_BEARER_TOKEN}|base64 -d)/g"> TWITTER_API_properties.sh && gp sync-done twitterProperties
 
 - name: Copy certs
   init: gp sync-await caCer && gp sync-await myuserCert && gp sync-await myuserKey
@@ -42,7 +42,7 @@ tasks:
   command: cp TWITTER_API_properties.sh step03/producer/TWITTER_API_properties.sh && cp TWITTER_API_properties.sh step04/producer/TWITTER_API_properties.sh && cp TWITTER_API_properties.sh step05/producer/TWITTER_API_properties.sh
 
 - name: Add OVHcloud API keys variables to properties
-  init: cp helpers/OVHcloud.properties.sh.template helpers/OVHcloud.properties.sh && echo "OVH_API_AK=\"$(echo $OVH_API_AK_b64|base64 -d)\"" >> helpers/OVHcloud.properties.sh && echo "OVH_API_AS=\"$(echo $OVH_API_AS_b64|base64 -d)\"" >> helpers/OVHcloud.properties.sh && echo "OVH_API_CK=\"$(echo $OVH_API_CK_b64|base64 -d)\"" >> helpers/OVHcloud.properties.sh
+  init: cp templates/OVHcloud.properties.sh.template helpers/OVHcloud.properties.sh && echo "OVH_API_AK=\"$(echo $OVH_API_AK_b64|base64 -d)\"" >> helpers/OVHcloud.properties.sh && echo "OVH_API_AS=\"$(echo $OVH_API_AS_b64|base64 -d)\"" >> helpers/OVHcloud.properties.sh && echo "OVH_API_CK=\"$(echo $OVH_API_CK_b64|base64 -d)\"" >> helpers/OVHcloud.properties.sh
   command: echo "OVHcloud API keys variables added to OVHcloud.properties.sh file ✅"
 
 - name: Get public IP address
