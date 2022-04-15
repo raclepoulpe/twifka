@@ -39,7 +39,7 @@ tasks:
 
 - name: Copy Twitter properties file
   init: gp sync-await direxists && gp sync-await twitterProperties
-  command: cp TWITTER_API_properties.sh step03/producer/TWITTER_API_properties.sh && cp TWITTER_API_properties.sh step04/producer/TWITTER_API_properties.sh
+  command: cp TWITTER_API_properties.sh step03/producer/TWITTER_API_properties.sh && cp TWITTER_API_properties.sh step04/producer/TWITTER_API_properties.sh && cp TWITTER_API_properties.sh step05/producer/TWITTER_API_properties.sh
 
 - name: Add OVHcloud API keys variables to properties
   init: cp helpers/OVHcloud.properties.sh.template helpers/OVHcloud.properties.sh && echo "OVH_API_AK=\"$(echo $OVH_API_AK_b64|base64 -d)\"" >> helpers/OVHcloud.properties.sh && echo "OVH_API_AS=\"$(echo $OVH_API_AS_b64|base64 -d)\"" >> helpers/OVHcloud.properties.sh && echo "OVH_API_CK=\"$(echo $OVH_API_CK_b64|base64 -d)\"" >> helpers/OVHcloud.properties.sh
