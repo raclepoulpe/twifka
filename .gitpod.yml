@@ -24,10 +24,10 @@ tasks:
   command: echo $KAFKA_MYUSER_KEY | base64 -d > ssl/myuser.key
 
 - name: Create kafkacat.conf file
-  command: cat kafkacat.conf.template | sed -e "s/KAFKA_SERVICE_URL/$(echo ${KAFKA_SERVICE_URL}|base64 -d)/g" > kafkacat.conf && rm kafkacat.conf.template && gp sync-done kafkaconf
+  command: cat kafkacat.conf.template | sed -e "s/KAFKA_SERVICE_URL/$(echo ${KAFKA_SERVICE_URL}|base64 -d)/g" > kafkacat.conf && gp sync-done kafkaconf
 
 - name: Create TWITTER_API_properties.sh file
-  command: cat TWITTER_API_properties.sh.template | sed -e "s/TWITTER_BEARER_TOKEN/$(echo ${TWITTER_BEARER_TOKEN}|base64 -d)/g"> TWITTER_API_properties.sh && rm TWITTER_API_properties.sh.template && gp sync-done twitterProperties
+  command: cat TWITTER_API_properties.sh.template | sed -e "s/TWITTER_BEARER_TOKEN/$(echo ${TWITTER_BEARER_TOKEN}|base64 -d)/g"> TWITTER_API_properties.sh && gp sync-done twitterProperties
 
 - name: Copy certs
   init: gp sync-await caCer && gp sync-await myuserCert && gp sync-await myuserKey
