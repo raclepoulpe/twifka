@@ -7,8 +7,8 @@
 /step04/producer/ssl
 /step05/producer/kafkacat.conf
 /step05/producer/ssl
-/step05/consumer/bash/ssl
-/step05/consumer/bash/kafkacat.conf
+/step05/consumers/bash/ssl
+/step05/consumers/bash/kafkacat.conf
 TWITTER_API_properties.sh
 kafkacat.conf
 
