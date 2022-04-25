@@ -1,3 +1,10 @@
+log() {
+if [ "$LOGLEVEL" == "INFO" ];
+then
+        echo "INFO - $(date '+%Y-%m-%d|%H:%M:%S') - $1"
+fi
+}
+
 urlencode() {
     # urlencode <string>
 

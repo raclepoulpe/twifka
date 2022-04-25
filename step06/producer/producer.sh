@@ -4,13 +4,6 @@
 . PRODUCER_properties.sh
 . PRODUCER_functions.sh
 
-log() {
-if [ "$LOGLEVEL" == "INFO" ];
-then
-	echo "INFO - $(date '+%Y-%m-%d|%H:%M:%S') - $1"
-fi
-}
-
 urlEncodedQuery=$(urlencode "$query")
 log "query: $query"
 
