@@ -8,8 +8,7 @@ log() {
 if [ "$LOGLEVEL" == "INFO" ];
 then
 	# POST data
-	curl -XPOST -u "$OPENSEARCH_USER:$OPENSEARCH_PWD" https://$OPENSEARCH_HOST:20184/twifka/_doc -H "Content-Type: application/json" -d ''"$1"'' #1>/dev/null 2>1
-
+	curl -XPOST -u "$OPENSEARCH_USER:$OPENSEARCH_PWD" https://$OPENSEARCH_HOST:20184/twifka/_doc -H "Content-Type: application/json" -d ''"$1"''
 fi
 }
 
@@ -30,3 +29,6 @@ urlencode() {
 
     LC_COLLATE=$old_lc_collate
 }
+
+# Examples
+# curl -XGET -u "$OPENSEARCH_USER:$OPENSEARCH_PWD" https://$OPENSEARCH_HOST:20184/twifka/_search -H "content-type: application/json"   -d '{"query":{"match":{"text": "Elon"}}}' |jq

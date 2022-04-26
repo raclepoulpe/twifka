@@ -33,11 +33,11 @@ tasks:
 
 - name: Copy certs
   init: gp sync-await caCer && gp sync-await myuserCert && gp sync-await myuserKey
-  command: cp ssl/* step02/producer/ssl && cp ssl/* step03/producer/ssl && cp ssl/* step04/producer/ssl && cp ssl/* step05/producer/ssl && cp ssl/* step05/consumers/bash/ssl && cp ssl/* step06/consumers/bash/ssl
+  command: cp ssl/* step02/producer/ssl && cp ssl/* step03/producer/ssl && cp ssl/* step04/producer/ssl && cp ssl/* step05/producer/ssl && cp ssl/* step06/producer/ssl && cp ssl/* step05/consumers/bash/ssl && cp ssl/* step06/consumers/bash/ssl
 
 - name: Copy kafkaconf file
   init: gp sync-await direxists && gp sync-await kafkaconf
-  command: cp kafkacat.conf step02/producer/kafkacat.conf && cp kafkacat.conf step03/producer/kafkacat.conf && cp kafkacat.conf step04/producer/kafkacat.conf && cp kafkacat.conf step05/producer/kafkacat.conf && cp kafkacat.conf step05/consumers/bash/kafkacat.conf && cp kafkacat.conf step06/consumers/bash/kafkacat.conf
+  command: cp kafkacat.conf step02/producer/kafkacat.conf && cp kafkacat.conf step03/producer/kafkacat.conf && cp kafkacat.conf step04/producer/kafkacat.conf && cp kafkacat.conf step05/producer/kafkacat.conf && cp kafkacat.conf step06/producer/kafkacat.conf && cp kafkacat.conf step05/consumers/bash/kafkacat.conf && cp kafkacat.conf step06/consumers/bash/kafkacat.conf
 
 - name: Copy Twitter properties file
   init: gp sync-await direxists && gp sync-await twitterProperties

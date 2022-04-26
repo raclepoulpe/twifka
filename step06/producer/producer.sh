@@ -34,7 +34,7 @@ then
   json="$(echo "{\"id\":$i,\"created_at\":$created_at,\"text\":$text,\"author\":$user}" | jq -c)";\
  
   log "$json";\
- # echo $json | kafkacat -q -F kafkacat.conf -P -t mytopic;\
+  echo $json | kafkacat -q -F kafkacat.conf -P -t mytopic;\
  done
 else	
 	log "{\"nb_result\":\"$nb_result\"}"
