@@ -10,6 +10,8 @@ tasks:
     mkdir -p step04/producer/ssl &&
     mkdir -p step05/producer/ssl &&
     mkdir -p step05/consumers/bash/ssl &&
+    mkdir -p step06/producer/ssl &&
+    mkdir -p step06/consumers/bash/ssl &&
     gp sync-done direxists
   command: echo "Directories created"
 
@@ -31,15 +33,15 @@ tasks:
 
 - name: Copy certs
   init: gp sync-await caCer && gp sync-await myuserCert && gp sync-await myuserKey
-  command: cp ssl/* step02/producer/ssl && cp ssl/* step03/producer/ssl && cp ssl/* step04/producer/ssl && cp ssl/* step05/producer/ssl && cp ssl/* step05/consumers/bash/ssl
+  command: cp ssl/* step02/producer/ssl && cp ssl/* step03/producer/ssl && cp ssl/* step04/producer/ssl && cp ssl/* step05/producer/ssl && cp ssl/* step05/consumers/bash/ssl && cp ssl/* step06/consumers/bash/ssl
 
 - name: Copy kafkaconf file
   init: gp sync-await direxists && gp sync-await kafkaconf
-  command: cp kafkacat.conf step02/producer/kafkacat.conf && cp kafkacat.conf step03/producer/kafkacat.conf && cp kafkacat.conf step04/producer/kafkacat.conf && cp kafkacat.conf step05/producer/kafkacat.conf && cp kafkacat.conf step05/consumers/bash/kafkacat.conf
+  command: cp kafkacat.conf step02/producer/kafkacat.conf && cp kafkacat.conf step03/producer/kafkacat.conf && cp kafkacat.conf step04/producer/kafkacat.conf && cp kafkacat.conf step05/producer/kafkacat.conf && cp kafkacat.conf step05/consumers/bash/kafkacat.conf && cp kafkacat.conf step06/consumers/bash/kafkacat.conf
 
 - name: Copy Twitter properties file
   init: gp sync-await direxists && gp sync-await twitterProperties
-  command: cp TWITTER_API_properties.sh step03/producer/TWITTER_API_properties.sh && cp TWITTER_API_properties.sh step04/producer/TWITTER_API_properties.sh && cp TWITTER_API_properties.sh step05/producer/TWITTER_API_properties.sh
+  command: cp TWITTER_API_properties.sh step03/producer/TWITTER_API_properties.sh && cp TWITTER_API_properties.sh step04/producer/TWITTER_API_properties.sh && cp TWITTER_API_properties.sh step05/producer/TWITTER_API_properties.sh && cp TWITTER_API_properties.sh step06/producer/TWITTER_API_properties.sh
 
 - name: Add OVHcloud API keys variables to properties
   init: cp templates/OVHcloud.properties.sh.template helpers/OVHcloud.properties.sh && echo "OVH_API_AK=\"$(echo $OVH_API_AK_b64|base64 -d)\"" >> helpers/OVHcloud.properties.sh && echo "OVH_API_AS=\"$(echo $OVH_API_AS_b64|base64 -d)\"" >> helpers/OVHcloud.properties.sh && echo "OVH_API_CK=\"$(echo $OVH_API_CK_b64|base64 -d)\"" >> helpers/OVHcloud.properties.sh
