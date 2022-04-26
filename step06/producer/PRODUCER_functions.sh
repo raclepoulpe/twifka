@@ -31,4 +31,5 @@ urlencode() {
 }
 
 # Examples
-# curl -XGET -u "$OPENSEARCH_USER:$OPENSEARCH_PWD" https://$OPENSEARCH_HOST:20184/twifka/_search -H "content-type: application/json"   -d '{"query":{"match":{"text": "Elon"}}}' |jq
+# curl -XGET -H "content-type: application/json" -u "$OPENSEARCH_USER:$OPENSEARCH_PWD" https://$OPENSEARCH_HOST:20184/twifka/_search -d '{"query":{"match":{"text": "Elon"}}}' |jq
+# curl -XGET -H "content-type: application/json" -u "$OPENSEARCH_USER:$OPENSEARCH_PWD" https://$OPENSEARCH_HOST:20184/twifka/_search?q=text:Elon" | jq
