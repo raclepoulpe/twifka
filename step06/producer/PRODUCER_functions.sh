@@ -1,9 +1,6 @@
-log() {
-if [ "$LOGLEVEL" == "INFO" ];
-then
-        echo "INFO - $(date '+%Y-%m-%d|%H:%M:%S') - $1"
-fi
-}
+export OPENSEARCH_USER="$(echo $OPENSEARCH_USER_B64|base64 -d)"
+export OPENSEARCH_PWD="$(echo $OPENSEARCH_PWD_B64|base64 -d)"
+export OPENSEARCH_HOST="$(echo $OPENSEARCH_HOST_B64|base64 -d)"
 
 urlencode() {
     # urlencode <string>
@@ -22,3 +19,14 @@ urlencode() {
 
     LC_COLLATE=$old_lc_collate
 }
+
+log() {
+if [ "$LOGLEVEL" == "INFO" ];
+then
+	dt="$(date '+%Y-%m-%d %H:%M:%S')"
+	msg="{\"dt\":\"${dt}\",\"info\":\"$(urlencode $1)\"}"
+#	echo "$msg"
+curl -XPOST -u "$OPENSEARCH_USER:$OPENSEARCH_PWD" https://$OPENSEARCH_HOST:20184/twifka/_doc -H "Content-Type: application/json" -d "$msg"
+fi
+}
+

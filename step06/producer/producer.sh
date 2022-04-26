@@ -33,8 +33,9 @@ then
   user=$(echo $resp | jq --arg aid ${author_id//\"/} '.includes[][] | select(.id==($aid))');\
   json="$(echo "{\"id\":$i,\"created_at\":$created_at,\"text\":$text,\"author\":$user}" | jq )";\
  
-  log " - Push tweet with id ${id} to Kafka..";\
-  echo $json | kafkacat -q -F kafkacat.conf -P -t mytopic;\
+  log "Push tweet with id ${id} to Kafka..";\
+  log "$json";\
+ # echo $json | kafkacat -q -F kafkacat.conf -P -t mytopic;\
  done
 else
  log "Request returns no response"
