@@ -7,12 +7,8 @@ export OPENSEARCH_HOST="$(echo $OPENSEARCH_HOST_B64 | base64 -d)"
 log() {
 if [ "$LOGLEVEL" == "INFO" ];
 then
-	# Date format for Opensearch : YYYY-MM-DD hh:mm:ss
-	dt="$(date '+%Y-%m-%d %H:%M:%S')"
-	# Format message - adding base64 encoded json info log
-	msg="{\"dt\":\"${dt}\",\"info\":\"$(echo $1 | base64 -w 0)\"}"
 	# POST data
-	curl -XPOST -u "$OPENSEARCH_USER:$OPENSEARCH_PWD" https://$OPENSEARCH_HOST:20184/twifka/_doc -H "Content-Type: application/json" -d ''"$msg"''
+	curl -XPOST -u "$OPENSEARCH_USER:$OPENSEARCH_PWD" https://$OPENSEARCH_HOST:20184/twifka/_doc -H "Content-Type: application/json" -d ''"$1"'' #1>/dev/null 2>1
 
 fi
 }

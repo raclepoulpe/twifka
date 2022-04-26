@@ -11,6 +11,10 @@ IP.pub
 /step05/producer/ssl
 /step05/consumers/bash/ssl
 /step05/consumers/bash/kafkacat.conf
+/step06/producer/kafkacat.conf
+/step06/producer/ssl
+/step06/consumers/bash/ssl
+/step06/consumers/bash/kafkacat.conf
 TWITTER_API_properties.sh
 kafkacat.conf
 
