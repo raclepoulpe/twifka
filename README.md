@@ -33,3 +33,7 @@ The tutorial is organized in several successive steps. You can start at any stag
 ### STEP 04 - Create a Bash consumer
 
 👉 [Follow Step04](../..//tree/main/step04)
+
+### STEP 05 - Push producer logs to Opensearch
+
+🛝  [Slide to Step05](../..//tree/main/step05)
