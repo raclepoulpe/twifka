@@ -32,3 +32,32 @@ bXlnaXZlbnBhc3N3b3JkCg==
 - OPENSEARCH_HOST_B64
 - OPENSEARCH_USER_B64
 - OPENSEARCH_PWD_B64
+
+## Opensearch Dashboard
+
+### Dev Tools
+
+```
+PUT /twifka
+
+GET /twifka
+
+PUT /twifka/_doc/1
+{
+  "demo":"twitch"
+}
+
+GET /twifka/_doc/1
+
+GET /twifka/_search
+{
+  "query": {
+    "match": { "demo":"twitch"
+    }
+  }
+}
+
+PUT /twifka_producer_logs
+```
+
+
