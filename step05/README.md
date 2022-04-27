@@ -33,9 +33,9 @@ bXlnaXZlbnBhc3N3b3JkCg==
 - OPENSEARCH_USER_B64
 - OPENSEARCH_PWD_B64
 
-## Opensearch Dashboard
+## Opensearch manage indexes and datas
 
-### Dev Tools
+### Opensearch Dev Tools
 
 ![Step05 Opensearch Dashboard Dev Tools](images/step05_05.png)
 
@@ -62,4 +62,40 @@ GET /twifka/_search
 PUT /twifka_producer_logs
 ```
 
+## Curl commands
 
+### URL
+
+export OPENSEARCH_USER="$(echo $OPENSEARCH_USER_B64 | base64 -d)"
+export OPENSEARCH_PWD="$(echo $OPENSEARCH_PWD_B64 | base64 -d)"
+export OPENSEARCH_HOST="$(echo $OPENSEARCH_HOST_B64 | base64 -d)"
+
+curl -XGET -H "content-type: application/json" -u "$OPENSEARCH_USER:$OPENSEARCH_PWD" https://$OPENSEARCH_HOST:20184/twifka/_search -d '{"query":{"match":{"text": "Elon"}}}' |jq
+
+curl -XGET -H "content-type: application/json" -u "$OPENSEARCH_USER:$OPENSEARCH_PWD" https://$OPENSEARCH_HOST:20184/twifka/_search?q=text:Elon" | jq
+
+## PRODUCER_functions.sh file
+
+### Variables
+
+export OPENSEARCH_USER="$(echo $OPENSEARCH_USER_B64 | base64 -d)"
+export OPENSEARCH_PWD="$(echo $OPENSEARCH_PWD_B64 | base64 -d)"
+export OPENSEARCH_HOST="$(echo $OPENSEARCH_HOST_B64 | base64 -d)"
+
+### Log function
+
+log() {
+if [ "$LOGLEVEL" == "INFO" ];
+then
+	# POST data
+	curl -XPOST -u "$OPENSEARCH_USER:$OPENSEARCH_PWD" https://$OPENSEARCH_HOST:20184/twifka/_doc -H "Content-Type: application/json" -d ''"$1"''
+fi
+}
+
+## producer.sh file
+
+### minify jq output json format
+
+json="$(echo "{\"id\":$i,\"created_at\":$created_at,\"text\":$text,\"author\":$user}" | jq -c)";\
+
+ 
