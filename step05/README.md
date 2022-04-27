@@ -37,6 +37,8 @@ bXlnaXZlbnBhc3N3b3JkCg==
 
 ### Dev Tools
 
+![Step05 Opensearch Dashboard Dev Tools](images/step05_05.png)
+
 ```
 PUT /twifka
 
