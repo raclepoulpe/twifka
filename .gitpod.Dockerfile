@@ -9,7 +9,3 @@ RUN wget https://artifacts.opensearch.org/opensearch-clients/opensearch-cli/open
     sudo mv opensearch-cli /usr/local/bin/opensearch-cli && \
     rm opensearch-cli-1.1.0-linux-x64.zip
 
-# Ansible
-RUN sudo add-apt-repository -y ppa:ansible/ansible
-RUN sudo apt update && sudo apt install -y ansible
-
